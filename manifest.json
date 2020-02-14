@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "SocStop",
+    "description": "SocStop",
+    "version" : "1.0.0",
+    "icons": {"128":"icons.png"},
+    "browser_action":{
+        "default_icon":"icons.png",
+        "default_popup":"popup.html"
+    },
+    "content_scripts": [ {
+        "js": [ "jquery.min.js","popup.js"],
+        "matches": [ "http://*/*", "https://*/*"]
+    }],
+    "permissions":["tabs"],
+    "background": {
+        "scripts": ["popup.js"],
+        "persistent": false
+      }
+
+}
