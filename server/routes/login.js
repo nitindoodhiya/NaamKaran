@@ -37,5 +37,25 @@ router.get('/login',(req,res,err)=>{
 router.get('/register',(req,res,err)=>{
    res.render('signup');
 });
+router.post('/register', function(req, res, next) {
+   var det = req.body;
+   var email  = det.username;
+   var password = det.password;
+   var q = "INSERT INTO users VALUES('"+email+"','"+password+"')";
+   connection.query(q,(err,result)=>{
+      if (err) {
+         throw err;
+
+      }
+      else{
+         req.session.email = email;
+         
+         console.log('registered');
+         res.render('dashboard');
+         
+      }
+   });
+   
+});
 
 module.exports = router;
