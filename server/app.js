@@ -4,12 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql      = require('mysql');
-var session = require('express-session');
-// app.use(session({secret:'XASDASDA'}));
 
 var indexRouter = require('./routes/login');
 var usersRouter = require('./routes/users');
-// var loginController = require('./controller/logincontroller.js');
 
 var app = express();
 var session = require('express-session');
@@ -28,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -47,5 +44,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(3000,function(){
+  console.log("Listening to the port 3000");
+});
+
 
 module.exports = app;
