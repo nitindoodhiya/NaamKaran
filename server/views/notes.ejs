@@ -1,0 +1,56 @@
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Notes Portal</title>
+		<link rel="stylesheet" href="./css/signin.css">	
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+
+<script>
+
+
+document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("input_submit").click();
+    }
+});		
+
+function hey1(){
+
+    var notes = document.getElementById("notes");
+    if(notes.value == '')
+    {
+	    notes.setCustomValidity("Write your notes first.....");
+    }
+    else
+    {
+        notes.setCustomValidity("");
+    }
+}
+
+</script>
+
+<div class="login-wrap">
+	<div class="login-html">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Notes</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up" style="display :  none;"><label for="tab-2" class="tab" style="display: none;">Verify</label>
+        <div class="login-form">
+            <form action="notes" method="post" class="form">
+                <div class="sign-in-htm">
+                    <div class="group">
+                        <label for="user" class="label">Email</label>
+                        <textarea rows="4" cols="50" name="notes" id="notes" placeholder="Enter text here..."></textarea>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Add Notes" onclick="hey1()" id="input_submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+	</div>
+</div>

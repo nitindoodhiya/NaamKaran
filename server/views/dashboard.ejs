@@ -1,0 +1,27 @@
+<form action="settime" method="post">
+    <label for="Facebook">Facebook</label>
+    <input type="range" min="1" max="120" value="" class="slider" id="fbRange" name="fb" onchange="change('fb')">
+    <div id="fbscore"></div>
+    <label for="Instagram">Instagram</label>
+    <input type="range" min="1" max="120" value="" class="slider" id="instaRange" name="insta"  onchange="change('insta')">
+    <div id="instascore"></div>
+    <label for="Reddit">Reddit</label>
+    <input type="range" min="1" max="120" value="" class="slider" id="redditRange" name="reddit"  onchange="change('reddit')">
+    <div id="redditscore"></div>
+    <label for="linkedIn">LinkedIn</label>
+    <input type="range" min="1" max="120" value="" class="slider" id="linkedInRange" name="linkedIn"  onchange="change('linkedIn')">
+    <div id="linkedInscore"></div>
+    <label for="Twitter">Twitter</label>
+    <input type="range" min="1" max="120" value="" class="slider" id="TwitterRange" name="Twitter"  onchange="change('Twitter')">
+    <div id="Twitterscore"></div>
+    <label for="Youtube">Youtube</label>
+    <input type="range" min="1" max="120" value="" class="slider" id="YoutubeRange" name="Youtube"  onchange="change('Youtube')">
+    <div id="Youtubescore"></div>
+    <button type="submit">Set limit</button>
+</form>
+<script>
+    function change(str) {
+        var score = document.getElementById(str+"Range").value;
+        document.getElementById(str+'score').innerHTML = score
+    }
+</script>

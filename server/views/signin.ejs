@@ -1,0 +1,211 @@
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Notes Portal</title>
+		<link rel="stylesheet" href="./css/signin.css">	
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+		
+		var em = "<%= probemail %>";
+		console.log(em);
+	
+		if(em)
+		{
+		document.getElementById("button2").click();
+		}
+	
+	}, false);		
+document.addEventListener("keyup", function(event) {
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			document.getElementById("input_submit").click();
+		}
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			document.getElementById("input_submit1").click();
+		}
+});		
+function myFunction(){
+		
+	var email1 = document.getElementById('user');
+	var pass = document.getElementById('pass');
+	var em = "<%= probemail %>";
+		if(em)
+		{
+			if(em == "wrong")
+			{
+				email1.setCustomValidity("Email id You entered was wrong");
+			}
+			else
+			{
+			email1.setCustomValidity("");
+			pass.setCustomValidity("Password is incorrect");
+			}
+		}
+}
+function hashCode(str) {
+	return str.split('').reduce((prevHash, currVal) =>
+	(((prevHash << 5) - prevHash) + currVal.charCodeAt(0)) | 0, 0);
+}	
+function hey() {	
+	var email1 = document.getElementById('user');
+	var pass = document.getElementById('pass');
+
+	if(email1.value == "")
+	email1.setCustomValidity("Enter the Email Id");
+	else if(pass.value == "")
+	{
+	email1.setCustomValidity("");
+	pass.setCustomValidity("Enter your password");
+	}
+	else
+	{
+	email1.setCustomValidity("");
+	pass.setCustomValidity("");
+	document.getElementById("pass").value = hashCode(pass.value);
+	}
+}
+function validatemail(){
+
+	var name = 'email='+document.getElementById("email").value;
+	console.log(name);
+	$.ajax({
+	type: "GET",
+	url: 'http://localhost:5000/email',
+	data:  name ,
+	success: function(data) {
+	console.log(data[0]);
+	if(data[0] == "false")
+	{
+		alert("Email Id already Exists");
+		window.location.href="http://localhost:5000/signin";
+	}
+	else
+	{
+		alert("heyyy");
+		document.getElementById("signform_right").submit();
+	}
+	}
+	});
+}			
+function hey1() {
+
+var name = document.getElementById("name");
+var guaremail = document.getElementById("guaremail")
+var email = document.getElementById("email");
+var password = document.getElementById('password');
+
+  if(name.value == '')
+  {
+	  name.setCustomValidity("Please Enter Your Full Name");
+  }
+  else if(guaremail.value == '')
+  {
+	  name.setCustomValidity("");
+	  guaremail.setCustomValidity('Please Enter your Mobile Number');
+	  
+  }
+  else if(email.value == '')
+  {
+	  name.setCustomValidity("");
+	  guaremail.setCustomValidity("");
+	  email.setCustomValidity('Please Enter Your Email');
+	  
+  }
+  else if(guaremail.value == email.value)
+  {
+		name.setCustomValidity("");
+		email.setCustomValidity("");
+		guaremail.setCustomValidity("Please Enter Your Guardian's Email");
+  }
+  else if(password.value == '')
+  {
+	  name.setCustomValidity("");
+	  guaremail.setCustomValidity("");
+	  email.setCustomValidity("");
+	  password.setCustomValidity('Please Enter Your password');	  
+  }
+  else
+  {
+	  name.setCustomValidity("");
+	  guaremail.setCustomValidity("");
+	  email.setCustomValidity("");
+	  password.setCustomValidity("");
+	  document.getElementById("password").value = hashCode(password.value);
+	  validatemail();
+  }
+}
+
+			</script>
+		
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+			<div class="login-form">
+				<form action="login" method="post" class="form">
+					<button onclick="myFunction()" id="button2" style="display: none;">OK</button>
+					<div class="sign-in-htm">
+						<div class="group">
+							<label for="user" class="label">Email</label>
+							<% if(probemail != "wrong"){ %>
+							<input id="user" type="email" class="input" name="email" value="<%= probemail %>">
+							<% } else { %>
+								<input id="user" type="email" class="input" name="email">
+							<% } %>
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Password</label>
+							<input id="pass" type="password" class="input" data-type="password" name="password">
+						</div>
+						<div class="group">
+							<input id="check" type="checkbox" class="check" checked>
+							<label for="check"><span class="icon"></span> Keep me Signed in</label>
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Sign In" onclick="hey()" id="input_submit1">
+						</div>
+						<div class="hr"></div>
+						<div class="foot-lnk">
+							<a href="recover">Forgot Password?</a>
+						</div>
+					</div>
+				</form>
+				<form id="signform_right" action="signup" method="post" class="form">
+					<div class="sign-up-htm">
+						<div class="group">
+							<label for="pass" class="label">Name</label>
+							<input id="name" name="name" type="text" class="input">
+						</div>
+						
+						<div class="group">
+							<label for="user" class="label">Email</label>
+							<input id="email" name="email" type="email" class="input">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Guardian's Email</label>
+							<input id="guaremail" name="guaremail"  type="email" class="input">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Password</label>
+							<input id="password" name="password" type="password" class="input" data-type="password">
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Sign Up" onclick="hey1()" id="input_submit">
+						</div>
+						<div class="hr"></div>
+						<div class="foot-lnk">
+							<label for="tab-1">Already Member?</a>
+						</div>
+					</div>
+				</form>
+		</div>
+	</div>
+</div>

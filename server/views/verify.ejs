@@ -1,0 +1,92 @@
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Notes Portal</title>
+		<link rel="stylesheet" href="./css/signin.css">	
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+		
+		var em = "<%= versent %>";
+		console.log(em);
+		var em1 = "<%= veremail %>";
+		console.log(em1);
+	}, false);
+
+	document.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("input_submit").click();
+			}
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("input_submit1").click();
+			}
+	});		
+
+</script>
+		
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Verify</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Verify</label>
+			<div class="login-form">
+				<% if(veremail == true){ %>
+				<form action="verify" method="post" class="form">
+					<div class="sign-in-htm">
+						<div class="group">
+							<h4 style="color: white;">Your email <%= email %> has been verified</h4>
+						</div>
+					</div>
+				</form>
+				<% }else if(versent != true){ %>
+				<form action="verify" method="post" class="form">
+					<div class="sign-in-htm">
+						<div class="group">
+							<label for="user" class="label">Email</label>
+							<input id="user" type="email" class="input" name="email" value="<%= email %>" placeholder="<%= email%>">
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Sign In" onclick="hey()" id="input_submit1">
+						</div>
+					</div>
+				</form>
+				<% }else{ %>
+				<form action="verify" method="post" class="form">
+					<div class="sign-in-htm">
+						<div class="group">
+							<h4 style="color: white;">A verification email has been sent to your email <%= email %>, check your email to verify your account</h4>
+						</div>
+					</div>
+				</form>
+				<% }%>
+				<% if(guarversent != true){ %>
+				<form id="signform_right" action="guarverify" method="post" class="form">
+					<div class="sign-up-htm">
+						<div class="group">
+							<label for="user" class="label">Guardian's Email</label>
+							<input id="email" name="email" type="email" class="input" value="<%= guaremail %>" placeholder="<%= guaremail %>">
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Sign Up" onclick="hey1()" id="input_submit">
+						</div>
+					</div>
+				</form>
+				<% }else {%>
+				<form id="signform_right" action="guarverify" method="post" class="form">
+					<div class="sign-up-htm">
+						<div class="group">
+							<h4 style="color: white;">A verification email has been sent to your email <%= guaremail %>, check your email to verify your account</h4>
+						</div>
+					</div>
+				</form>
+				<% } %>
+		</div>
+	</div>
+</div>
